@@ -1,4 +1,4 @@
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5556';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:30003';
 
 export { API_BASE_URL };
