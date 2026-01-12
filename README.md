@@ -24,7 +24,7 @@ This is the Algoflix website with admin dashboard, blog management, and cookie c
    node server.js
    ```
 
-The application will run on port 30003.
+The application will run on port 30004.
 
 ## SSH Command for Server Access
 
