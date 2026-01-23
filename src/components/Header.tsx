@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         { label: 'Why Choose AlgroFlix', path: '/why-choose-algoflix' }
       ]
     },
-    { id: 'blog', label: 'Blog', path: '/blog' },
+    /* { id: 'blog', label: 'Blog', path: '/blog' }, */
     { id: 'careers', label: 'Careers', path: '/careers' },
     { id: 'contact', label: 'Contact Us', path: '/contact' },
   ];

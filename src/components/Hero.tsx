@@ -11,18 +11,18 @@ const Hero: React.FC = () => {
           AlgroFlix is a next-generation IT services, solutions, and staff augmentation company helping startups, SMEs, and enterprises accelerate digital transformation through scalable technology, skilled talent, and innovation-driven execution.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300">
+          <a href="/contact" className="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300">
             Get in Touch
-          </button>
-          <button className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
+          </a>
+          <a href="/contact" className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
             Request Free Consultation
-          </button>
-          <button className="bg-teal-400 text-white font-bold py-3 px-8 rounded-lg hover:bg-teal-500 transition duration-300">
+          </a>
+          <a href="/it-staff-augmentation" className="bg-teal-400 text-white font-bold py-3 px-8 rounded-lg hover:bg-teal-500 transition duration-300">
             Hire Developers
-          </button>
-          <button className="bg-gray-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-900 transition duration-300">
+          </a>
+          <a href="/it-services" className="bg-gray-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-900 transition duration-300">
             Explore Our Services
-          </button>
+          </a>
         </div>
       </div>
     </section>

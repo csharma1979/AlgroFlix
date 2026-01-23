@@ -24,16 +24,17 @@ const Footer: React.FC = () => {
               <li><Link to="/engagement-models" className="text-gray-400 hover:text-white">Engagement Models</Link></li>
               <li><Link to="/industries-we-serve" className="text-gray-400 hover:text-white">Industries We Serve</Link></li>
               <li><Link to="/why-choose-algoflix" className="text-gray-400 hover:text-white">Why Choose AlgroFlix</Link></li>
-              <li><Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link></li>
+              {/* <li><Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link></li> */}
               <li><Link to="/careers" className="text-gray-400 hover:text-white">Careers</Link></li>
               <li><Link to="/contact" className="text-gray-400 hover:text-white">Contact Us</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-lg font-bold mb-4 text-teal-400">Connect With Us</h3>
-            <p className="text-gray-400 mb-4">📍 India</p>
-            <p className="text-gray-400 mb-4">📧 info@algroflix.com</p>
-            <p className="text-gray-400 mb-4">📞 +91-XXXXXXXXXX</p>
+            <p className="text-gray-400 mb-4">📍 DY-78/79, British Park, Bhojpur Road, Bhopal-462047</p>
+            <p className="text-gray-400 mb-4">🏢 #1221, BTM 4th Stage, 4th Main, 4th Cross, 1st Block, Bangalore - 560076</p>
+            <p className="text-gray-400 mb-4">📧 support@algroflix.com</p>
+            <p className="text-gray-400 mb-4">📞 +91-8073389099</p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white" aria-label="Facebook">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -48,7 +48,7 @@ const LandingPage: React.FC = () => {
           const publishedBlogs = data
             .filter((blog: any) => blog.status === 'published')
             .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-            .slice(0, 5); // Get only the 5 most recent blogs
+            .slice(0, 3); // Get only the 3 most recent blogs
           
           // Format the blogs to match the expected structure
           const formattedBlogs = publishedBlogs.map((blog: any) => ({
@@ -89,22 +89,6 @@ const LandingPage: React.FC = () => {
             date: "Jan 5, 2024",
             category: "Security",
             slug: "cybersecurity-best-practices"
-          },
-          {
-            id: 4,
-            title: "AI and Machine Learning Trends in 2024",
-            excerpt: "How artificial intelligence is transforming business operations.",
-            date: "Dec 28, 2023",
-            category: "AI",
-            slug: "ai-machine-learning-trends"
-          },
-          {
-            id: 5,
-            title: "Modern Web Development Practices",
-            excerpt: "Best practices for building scalable and maintainable web applications.",
-            date: "Dec 20, 2023",
-            category: "Web Development",
-            slug: "modern-web-development"
           }
         ];
         setBlogPosts(mockBlogs);

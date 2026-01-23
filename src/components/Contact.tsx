@@ -21,8 +21,21 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-gray-800">Office Location</h3>
-                  <p className="text-gray-600">India</p>
+                  <h3 className="font-bold text-lg text-gray-800">Office</h3>
+                  <p className="text-gray-600">DY-78/79, British Park, Bhojpur Road, Bhopal-462047</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="bg-blue-100 p-3 rounded-full mr-4">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 01-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-gray-800">Branch Office</h3>
+                  <p className="text-gray-600">#1221, BTM 4th Stage, 4th Main, 4th Cross, 1st Block, Bangalore - 560076</p>
                 </div>
               </div>
               
@@ -34,7 +47,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">Email</h3>
-                  <p className="text-gray-600">info@algroflix.com</p>
+                  <p className="text-gray-600">support@algroflix.com</p>
                 </div>
               </div>
               
@@ -46,7 +59,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">Phone</h3>
-                  <p className="text-gray-600">+91-XXXXXXXXXX</p>
+                  <p className="text-gray-600">+91-8073389099</p>
                 </div>
               </div>
             </div>
