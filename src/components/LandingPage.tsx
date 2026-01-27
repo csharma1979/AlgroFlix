@@ -109,7 +109,7 @@ const LandingPage: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">About AlgoFlix</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">About AlgroFlix</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
               AlgroFlix is a next-generation IT services, solutions, and staff augmentation company helping startups, SMEs, and enterprises accelerate digital transformation through scalable technology, skilled talent, and innovation-driven execution.
             </p>
@@ -355,7 +355,7 @@ const LandingPage: React.FC = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl mb-10 max-w-3xl mx-auto">
-            Join hundreds of satisfied clients who have accelerated their digital journey with AlgoFlix
+            Join hundreds of satisfied clients who have accelerated their digital journey with AlgroFlix
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a 

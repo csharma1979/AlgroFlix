@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WhyChooseAlgoFlix: React.FC = () => {
+const WhyChooseAlgroFlix: React.FC = () => {
   return (
     <section id="why-choose-algoflix" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -81,4 +81,4 @@ const WhyChooseAlgoFlix: React.FC = () => {
   );
 };
 
-export default WhyChooseAlgoFlix;
+export default WhyChooseAlgroFlix;

@@ -24,10 +24,10 @@ const TermsConditions: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">License to Use Content</h2>
           <p>You must not:</p>
           <ul className="list-disc pl-6 space-y-2 ml-4">
-            <li>Republish material from AlgoFlix</li>
-            <li>Sell, rent or sub-license material from AlgoFlix</li>
-            <li>Reproduce, duplicate or copy material from AlgoFlix</li>
-            <li>Redistribute content from AlgoFlix</li>
+            <li>Republish material from AlgroFlix</li>
+            <li>Sell, rent or sub-license material from AlgroFlix</li>
+            <li>Reproduce, duplicate or copy material from AlgroFlix</li>
+            <li>Redistribute content from AlgroFlix</li>
           </ul>
           
           <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">User Comments</h2>

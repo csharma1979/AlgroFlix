@@ -17,7 +17,7 @@ import TechnologiesPage from './components/TechnologiesPage';
 import ITStaffAugmentation from './components/ITStaffAugmentation';
 import EngagementModels from './components/EngagementModels';
 import IndustriesWeServe from './components/IndustriesWeServe';
-import WhyChooseAlgoFlix from './components/WhyChooseAlgoFlix';
+import WhyChooseAlgroFlix from './components/WhyChooseAlgroFlix';
 import ITServices from './components/ITServices';
 import LandingPage from './components/LandingPage';
 import CookieConsent from './components/CookieConsent';
@@ -75,7 +75,7 @@ const AppContent: React.FC = () => {
           <Route path="/it-staff-augmentation" element={<ITStaffAugmentation />} />
           <Route path="/engagement-models" element={<EngagementModels />} />
           <Route path="/industries-we-serve" element={<IndustriesWeServe />} />
-          <Route path="/why-choose-algoflix" element={<WhyChooseAlgoFlix />} />
+          <Route path="/why-choose-algoflix" element={<WhyChooseAlgroFlix />} />
           <Route path="/it-services" element={<ITServices />} />
           <Route path="/blog" element={<BlogListing />} />
                     <Route path="/blog/:slug" element={<BlogDetail />} />
