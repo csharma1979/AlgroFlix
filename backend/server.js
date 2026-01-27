@@ -125,6 +125,16 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Routes
+
+// Serve static files from the frontend build only for admin routes
+app.use('/admin', express.static(path.join(__dirname, '../build')));
+
+// Serve index.html for admin routes (React Router)
+app.get('/admin*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
+// API routes
 // Admin Login
 app.post('/api/admin/login', async (req, res) => {
   try {
@@ -323,15 +333,12 @@ app.get('/api/consent', authenticateToken, (req, res) => {
   }
 });
 
-// Serve static files from the frontend build
-app.use(express.static(path.join(__dirname, '../build')));
-
-// Serve index.html for all other routes (React Router)
+// For all other routes, redirect to the frontend app running on port 30002
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  res.redirect('http://localhost:30002' + req.url);
 });
 
-const PORT = process.env.PORT || 30004;
+const PORT = process.env.PORT || 4002;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
