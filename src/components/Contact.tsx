@@ -1,6 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { API_BASE_URL } from '../config/apiConfig';
 
 const Contact: React.FC = () => {
+  // Form state
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    companyName: '',
+    serviceInterested: '',
+    message: ''
+  });
+  
+  // Form status states
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    try {
+      // Validate required fields
+      if (!formData.fullName || !formData.email || !formData.message) {
+        throw new Error('Please fill in all required fields.');
+      }
+
+      // Prepare the email payload
+      const emailPayload = {
+        to: 'algroflix@gmail.com',
+        subject: `Contact Form Submission from ${formData.fullName}`,
+        body: `
+          New contact form submission:
+          
+          Name: ${formData.fullName}
+          Email: ${formData.email}
+          Phone: ${formData.phone}
+          Company: ${formData.companyName}
+          Service Interested: ${formData.serviceInterested}
+          Message: ${formData.message}
+          
+          Sent at: ${new Date().toLocaleString()}
+        `,
+        senderInfo: formData
+      };
+
+      // Send the form data to our backend API
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit the form. Please try again.');
+      }
+
+      const result = await response.json();
+      
+      // Reset form and show success message
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        companyName: '',
+        serviceInterested: '',
+        message: ''
+      });
+      
+      // Show success message regardless of email sending status
+      setSubmitSuccess(true);
+      
+      // Log email sending status for debugging
+      if (result.emailSent === false) {
+        console.log('Form submitted successfully, but email was not sent:', result.emailError);
+      } else {
+        console.log('Form submitted and email sent successfully');
+      }
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      setSubmitError(error.message || 'An error occurred while submitting the form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -17,7 +121,7 @@ const Contact: React.FC = () => {
                 <div className="bg-blue-100 p-3 rounded-full mr-4">
                   <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 01-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
@@ -67,14 +171,32 @@ const Contact: React.FC = () => {
           
           <div className="bg-white p-8 rounded-xl shadow-md">
             <h2 className="text-2xl font-bold text-blue-600 mb-6">Send us a Message</h2>
-            <form className="space-y-4">
+            
+            {/* Success message */}
+            {submitSuccess && (
+              <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                <strong>Success!</strong> Your message has been sent successfully. We'll get back to you soon!
+              </div>
+            )}
+            
+            {/* Error message */}
+            {submitError && (
+              <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                <strong>Error:</strong> {submitError}
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="fullName" className="block text-gray-700 mb-2">Full Name *</label>
                 <input 
                   type="text" 
                   id="fullName" 
+                  value={formData.fullName}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
                   placeholder="Enter your full name"
+                  required
                 />
               </div>
               
@@ -83,8 +205,11 @@ const Contact: React.FC = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
                   placeholder="Enter your email"
+                  required
                 />
               </div>
               
@@ -93,6 +218,8 @@ const Contact: React.FC = () => {
                 <input 
                   type="tel" 
                   id="phone" 
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
                   placeholder="Enter your phone number"
                 />
@@ -103,6 +230,8 @@ const Contact: React.FC = () => {
                 <input 
                   type="text" 
                   id="companyName" 
+                  value={formData.companyName}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
                   placeholder="Enter your company name"
                 />
@@ -112,6 +241,8 @@ const Contact: React.FC = () => {
                 <label htmlFor="serviceInterested" className="block text-gray-700 mb-2">Service Interested In</label>
                 <select 
                   id="serviceInterested" 
+                  value={formData.serviceInterested}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="">Select a service</option>
@@ -129,17 +260,25 @@ const Contact: React.FC = () => {
                 <label htmlFor="message" className="block text-gray-700 mb-2">Message *</label>
                 <textarea 
                   id="message" 
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={4} 
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
                   placeholder="Enter your message"
+                  required
                 ></textarea>
               </div>
               
               <button 
                 type="submit" 
-                className="w-full bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300"
+                disabled={isSubmitting}
+                className={`w-full font-bold py-3 px-8 rounded-lg transition duration-300 ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

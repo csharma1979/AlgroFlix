@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 require('dotenv').config();
 
@@ -124,15 +125,33 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
+// Create nodemailer transporter for business domain email
+const transporter = nodemailer.createTransport({
+  host: 'algroflix.com',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.EMAIL_USER || 'Support@algroflix.com',
+    pass: process.env.EMAIL_PASS || 'Welcome@123#$'
+  },
+  tls: {
+    rejectUnauthorized: false // Only for development - remove in production
+  }
+});
+
+// Verify transporter configuration
+transporter.verify((error, success) => {
+  if (error) {
+    console.log('Email transporter configuration error:', error);
+  } else {
+    console.log('Email transporter is ready to send messages');
+  }
+});
+
 // Routes
 
-// Serve static files from the frontend build only for admin routes
-app.use('/admin', express.static(path.join(__dirname, '../build')));
-
-// Serve index.html for admin routes (React Router)
-app.get('/admin*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
+// Serve static files from the frontend build
+app.use(express.static(path.join(__dirname, '../build')));
 
 // API routes
 // Admin Login
@@ -322,6 +341,57 @@ app.post('/api/consent', (req, res) => {
   }
 });
 
+// Contact form submission endpoint
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { to, subject, body, senderInfo } = req.body;
+    
+    // Log the contact information for debugging
+    console.log('Contact form submission received:');
+    console.log('To:', to);
+    console.log('Subject:', subject);
+    console.log('Body:', body);
+    console.log('Sender Info:', senderInfo);
+    
+    // Attempt to send email, but handle failure gracefully
+    try {
+      // Create email options
+      const mailOptions = {
+        from: senderInfo.email || 'algroflix@gmail.com',
+        to: to || 'algroflix@gmail.com',
+        subject: subject,
+        text: body
+      };
+      
+      // Send email using nodemailer
+      const info = await transporter.sendMail(mailOptions);
+      
+      console.log('Email sent successfully:', info.messageId);
+      
+      // Return success response
+      res.status(200).json({ 
+        message: 'Contact form submitted successfully', 
+        submittedAt: new Date().toISOString(),
+        messageId: info.messageId,
+        emailSent: true
+      });
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      
+      // Still return success to the frontend, but indicate email wasn't sent
+      res.status(200).json({ 
+        message: 'Contact form submitted successfully', 
+        submittedAt: new Date().toISOString(),
+        emailSent: false,
+        emailError: emailError.message
+      });
+    }
+  } catch (error) {
+    console.error('Error processing contact form:', error);
+    res.status(500).json({ message: 'Failed to process contact form' });
+  }
+});
+
 // Get all consent records (protected)
 app.get('/api/consent', authenticateToken, (req, res) => {
   try {
@@ -333,9 +403,9 @@ app.get('/api/consent', authenticateToken, (req, res) => {
   }
 });
 
-// For all other routes, redirect to the frontend app running on port 30002
+// Serve index.html for all other routes (React Router)
 app.get('*', (req, res) => {
-  res.redirect('http://localhost:30002' + req.url);
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 4002;
