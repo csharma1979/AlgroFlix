@@ -106,123 +106,242 @@ const LandingPage: React.FC = () => {
       <Hero />
 
       {/* Company Info Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">About AlgroFlix</h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              AlgroFlix is a next-generation IT services, solutions, and staff augmentation company helping startups, SMEs, and enterprises accelerate digital transformation through scalable technology, skilled talent, and innovation-driven execution.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="text-center p-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">100+</div>
-              <p className="text-gray-700">Projects Completed</p>
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-72 h-72 bg-blue-50 rounded-full filter blur-3xl opacity-30 pointer-events-none" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Side: About Text & CTA */}
+            <div className="lg:col-span-6 space-y-6">
+              <span className="text-blue-600 font-bold tracking-wider uppercase text-sm">Who We Are</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                Pioneering Intelligent Tech Solutions & Practical Professional Growth
+              </h2>
+              <p className="text-slate-600 text-lg leading-relaxed font-light">
+                AlgroFlix is a next-generation technology and talent enablement company. We specialize in end-to-end IT services, scalable staff augmentation, and industry-oriented professional learning.
+              </p>
+              <p className="text-slate-600 text-base leading-relaxed">
+                By bridging the gap between technological innovation and practical career readiness, we help startups, SMEs, and enterprises build intelligent systems while nurturing the next generation of business and HR leaders.
+              </p>
+              <div className="pt-4">
+                <Link 
+                  to="/about" 
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-bold group"
+                >
+                  Learn More About Our Journey 
+                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </div>
             </div>
-            <div className="text-center p-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
-              <p className="text-gray-700">Happy Clients</p>
+
+            {/* Right Side: Visual Metrics Grid */}
+            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              <div className="bg-slate-50 hover:bg-white p-8 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-blue-500/20 transition-all duration-300 transform hover:-translate-y-1">
+                <span className="text-4xl mb-3 block">🚀</span>
+                <div className="text-4xl font-extrabold text-blue-600 mb-1">100+</div>
+                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Projects Completed</h4>
+                <p className="text-slate-500 text-xs">High-impact IT products delivered globally.</p>
+              </div>
+
+              <div className="bg-slate-50 hover:bg-white p-8 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-indigo-500/20 transition-all duration-300 transform hover:-translate-y-1">
+                <span className="text-4xl mb-3 block">🤝</span>
+                <div className="text-4xl font-extrabold text-indigo-600 mb-1">50+</div>
+                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Happy Clients</h4>
+                <p className="text-slate-500 text-xs">Long-term partnerships built on trust.</p>
+              </div>
+
+              <div className="bg-slate-50 hover:bg-white p-8 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-purple-500/20 transition-all duration-300 transform hover:-translate-y-1">
+                <span className="text-4xl mb-3 block">👨‍🎓</span>
+                <div className="text-4xl font-extrabold text-purple-600 mb-1">500+</div>
+                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Professionals Trained</h4>
+                <p className="text-slate-500 text-xs">Industry-ready graduates from our Academy.</p>
+              </div>
+
+              <div className="bg-slate-50 hover:bg-white p-8 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-teal-500/20 transition-all duration-300 transform hover:-translate-y-1">
+                <span className="text-4xl mb-3 block">🏆</span>
+                <div className="text-4xl font-extrabold text-teal-600 mb-1">15+ Yrs</div>
+                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Core Expertise</h4>
+                <p className="text-slate-500 text-xs">Led by seasoned industry practitioners.</p>
+              </div>
+
             </div>
-            <div className="text-center p-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
-              <p className="text-gray-700">Expert Professionals</p>
-            </div>
+
           </div>
         </div>
       </section>
 
       {/* Services Card View Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive IT solutions tailored to your business needs
+            <span className="text-blue-600 font-bold tracking-wider uppercase text-sm">Capabilities</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4">Our Services & Academy</h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Empowering organizations with next-gen technology and building the future of HR leadership.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-teal-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">IT Services</h3>
-                <p className="text-gray-600 mb-4">End-to-end IT services and solutions for scalable, secure, and growth-oriented businesses.</p>
+            {/* Featured Card: AlgroFlix HR Academy */}
+            <div className="md:col-span-2 lg:col-span-3 bg-gradient-to-r from-indigo-950 via-purple-950 to-slate-950 rounded-2xl shadow-xl overflow-hidden border border-purple-500/20 hover:shadow-purple-500/10 transition-all duration-300 transform hover:-translate-y-0.5">
+              <div className="p-8 md:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full filter blur-3xl" />
+                <div className="max-w-3xl relative z-10">
+                  <span className="inline-block bg-teal-400/20 text-teal-300 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-teal-500/30">
+                    Flagship Institution
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-white mt-4 mb-3">AlgroFlix HR Academy</h3>
+                  <p className="text-slate-300 text-base md:text-lg mb-0 leading-relaxed font-light">
+                    Bridge academic learning and corporate expectations through practical, simulator-driven HR Generalist residency programs, professional portfolios, and college consulting. We build industry-ready HR professionals.
+                  </p>
+                </div>
+                <div className="flex-shrink-0 relative z-10">
+                  <a 
+                    href="/hr-academy" 
+                    className="inline-block w-full md:w-auto bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-bold py-3.5 px-8 rounded-lg shadow-lg hover:shadow-teal-400/20 transition-all duration-300 text-center"
+                  >
+                    Explore HR Academy
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* IT Services Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-blue-600 to-teal-500 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">💻</span>
+                  <h3 className="text-xl font-bold">IT Services & Solutions</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    End-to-end IT services, tech infrastructure development, and digital transformation consulting built for high scale, reliability, and modern growth.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-services" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-purple-500 to-indigo-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Staff Augmentation</h3>
-                <p className="text-gray-600 mb-4">Scale your teams rapidly with pre-vetted, highly skilled IT professionals.</p>
+            {/* Staff Augmentation Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-purple-600 to-indigo-500 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">👥</span>
+                  <h3 className="text-xl font-bold">Staff Augmentation</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Scale your development, engineering, and support teams instantly with our pre-vetted, highly qualified, and dedicated technology professionals.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-staff-augmentation" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-teal-500 to-green-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Custom Software Development</h3>
-                <p className="text-gray-600 mb-4">Tailor-made software solutions aligned to your business goals and objectives.</p>
+            {/* Custom Software Development Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-teal-600 to-emerald-500 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">⚙️</span>
+                  <h3 className="text-xl font-bold">Custom Software</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Tailor-made software ecosystems, core databases, and API integrations designed specifically to address and solve your complex organizational challenges.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-services#custom-software" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-yellow-500 to-orange-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Web Development</h3>
-                <p className="text-gray-600 mb-4">Modern, high-performance web experiences that reflect your brand and engage users.</p>
+            {/* Web Development Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-amber-500 to-orange-500 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">🌐</span>
+                  <h3 className="text-xl font-bold">Web Development</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Modern, high-performance web applications built on secure React and Next architectures, designed to deliver exceptional branding and visual experiences.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-services#web-development" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-red-500 to-pink-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Mobile App Development</h3>
-                <p className="text-gray-600 mb-4">Intelligent mobile solutions for a connected world with cross-platform support.</p>
+            {/* Mobile App Development Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-rose-500 to-pink-500 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">📱</span>
+                  <h3 className="text-xl font-bold">Mobile App Development</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Sleek, highly responsive native and cross-platform mobile apps for iOS and Android, leveraging the latest features for seamless client touchpoints.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-services#mobile-apps" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-indigo-500 to-purple-400"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Cloud & DevOps Services</h3>
-                <p className="text-gray-600 mb-4">Cloud-native, scalable & secure infrastructure with DevOps best practices.</p>
+            {/* Cloud & DevOps Services Card */}
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="h-40 bg-gradient-to-r from-indigo-500 to-violet-600 p-6 flex flex-col justify-between text-white">
+                  <span className="text-3xl">☁️</span>
+                  <h3 className="text-xl font-bold">Cloud & DevOps</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Cloud migration, automated CI/CD pathways, containerization (Docker/Kubernetes), and robust security configurations for zero-downtime platforms.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0">
                 <a 
                   href="/it-services#cloud-devops" 
-                  className="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-block bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2 px-5 rounded-lg text-sm transition-all duration-300"
                 >
-                  Learn More
+                  Learn More →
                 </a>
               </div>
             </div>
@@ -350,29 +469,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-teal-500 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-          <p className="text-xl mb-10 max-w-3xl mx-auto">
-            Join hundreds of satisfied clients who have accelerated their digital journey with AlgroFlix
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a 
-              href="/contact" 
-              className="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300"
-            >
-              Schedule a Consultation
-            </a>
-            <a 
-              href="/services" 
-              className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300"
-            >
-              Explore Our Services
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

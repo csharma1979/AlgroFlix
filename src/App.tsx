@@ -29,6 +29,8 @@ import BlogForm from './components/BlogForm';
 import CookieConsents from './components/CookieConsents';
 import BlogListing from './components/BlogListing';
 import BlogDetail from './components/BlogDetail';
+import HRAcademy from './components/HRAcademy';
+import Enquiries from './components/Enquiries';
 
 // Component to handle section highlighting in header
 const SectionHandler: React.FC<{ setActiveSection: (section: string) => void }> = ({ setActiveSection }) => {
@@ -78,7 +80,8 @@ const AppContent: React.FC = () => {
           <Route path="/why-choose-algoflix" element={<WhyChooseAlgroFlix />} />
           <Route path="/it-services" element={<ITServices />} />
           <Route path="/blog" element={<BlogListing />} />
-                    <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/hr-academy" element={<HRAcademy />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />
@@ -86,6 +89,7 @@ const AppContent: React.FC = () => {
           <Route path="/admin/blog/new" element={<BlogForm />} />
           <Route path="/admin/blog/edit/:id" element={<BlogForm />} />
           <Route path="/admin/dashboard/cookie-consents" element={<CookieConsents />} />
+          <Route path="/admin/dashboard/enquiries" element={<Enquiries />} />
         </Routes>
       </main>
       

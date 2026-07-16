@@ -283,17 +283,7 @@ const Contact: React.FC = () => {
             </form>
           </div>
         </div>
-        
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-teal-500 text-white py-16 rounded-2xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Prefer Direct Communication?</h2>
-          <p className="text-xl mb-8">Reach out to us via email or phone for immediate assistance</p>
-          <a 
-            href="mailto:info@algroflix.com" 
-            className="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300"
-          >
-            Email Us
-          </a>
-        </div>
+
       </div>
     </section>
   );

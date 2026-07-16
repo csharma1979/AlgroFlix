@@ -92,9 +92,15 @@ const CookieConsents: React.FC = () => {
           >
             Blog Management
           </Link>
-          <div className="px-4 py-3 bg-blue-50 border-r-4 border-blue-500 text-blue-600">
+          <div className="px-4 py-3 bg-blue-50 border-r-4 border-blue-500 text-blue-600 font-medium">
             Cookie Consents
           </div>
+          <Link 
+            to="/admin/dashboard/enquiries" 
+            className="px-4 py-3 block text-gray-700 hover:bg-gray-50"
+          >
+            Enquiries & Applications
+          </Link>
         </nav>
       </div>
 

@@ -59,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/">
-              <img src={logo} alt="AlgroFlix Logo" className="h-10" />
+              <img src={logo} alt="AlgroFlix Logo" className="h-12" />
             </Link>
           </div>
 
@@ -115,26 +115,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
             ))}
           </nav>
 
-          {/* Profile Icon */}
+          {/* CTA Button */}
           <div className="hidden md:block">
-            <div className="relative">
-              <Link to="#">
-                <svg 
-                  className="w-8 h-8 text-blue-600 cursor-pointer" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" 
-                  />
-                </svg>
-              </Link>
-            </div>
+            <Link 
+              to="/hr-academy" 
+              className="inline-block bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold py-2.5 px-5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-sm tracking-wide transform hover:-translate-y-0.5"
+            >
+              AlgroFlix HR Academy
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -213,6 +201,16 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
                 )}
               </div>
             ))}
+            {/* Mobile CTA */}
+            <div className="pt-4 border-t border-gray-100">
+              <Link
+                to="/hr-academy"
+                className="block text-center bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold py-2.5 px-4 rounded-full shadow-md text-sm transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                AlgroFlix HR Academy
+              </Link>
+            </div>
           </nav>
         )}
       </div>

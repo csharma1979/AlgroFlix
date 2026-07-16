@@ -4,8 +4,32 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
+
+// Connect to MongoDB
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/algroflix';
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Connected to MongoDB database'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Define Enquiry Schema
+const enquirySchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  company: { type: String, default: '' },
+  service: { type: String, default: '' },
+  interest: { type: String, default: '' },
+  message: { type: String, default: '' },
+  type: { type: String, default: 'general' }, // 'general' or 'hr-academy'
+  createdAt: { type: Date, default: Date.now }
+});
+const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 const app = express();
 
@@ -319,6 +343,31 @@ app.delete('/api/blogs/:id', authenticateToken, (req, res) => {
   }
 });
 
+// Get all enquiries (protected)
+app.get('/api/enquiries', authenticateToken, async (req, res) => {
+  try {
+    const enquiries = await Enquiry.find().sort({ createdAt: -1 });
+    res.json(enquiries);
+  } catch (error) {
+    console.error('Error fetching enquiries:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete enquiry (protected)
+app.delete('/api/enquiries/:id', authenticateToken, async (req, res) => {
+  try {
+    const result = await Enquiry.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({ message: 'Enquiry not found' });
+    }
+    res.json({ message: 'Enquiry deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting enquiry:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Save cookie consent record
 app.post('/api/consent', (req, res) => {
   try {
@@ -353,11 +402,31 @@ app.post('/api/contact', async (req, res) => {
     console.log('Body:', body);
     console.log('Sender Info:', senderInfo);
     
+    // Save to MongoDB
+    try {
+      if (senderInfo) {
+        const newEnquiry = new Enquiry({
+          name: senderInfo.name || senderInfo.fullName || 'Unknown',
+          email: senderInfo.email || 'Unknown',
+          phone: senderInfo.phone || 'Unknown',
+          company: senderInfo.company || senderInfo.companyName || '',
+          service: senderInfo.service || senderInfo.serviceInterested || '',
+          interest: senderInfo.interest || '',
+          message: senderInfo.message || '',
+          type: senderInfo.type || 'general'
+        });
+        await newEnquiry.save();
+        console.log('Enquiry saved to MongoDB database.');
+      }
+    } catch (dbError) {
+      console.error('Failed to save enquiry to MongoDB database:', dbError);
+    }
+    
     // Attempt to send email, but handle failure gracefully
     try {
       // Create email options
       const mailOptions = {
-        from: senderInfo.email || 'algroflix@gmail.com',
+        from: (senderInfo && senderInfo.email) || 'algroflix@gmail.com',
         to: to || 'algroflix@gmail.com',
         subject: subject,
         text: body

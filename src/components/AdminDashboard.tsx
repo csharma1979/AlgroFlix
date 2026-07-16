@@ -29,7 +29,8 @@ const AdminDashboard: React.FC = () => {
 
   // Determine active tab based on the current location
   const activeTab = location.pathname.includes('blog-management') ? 'blog-management' : 
-                   location.pathname.includes('cookie-consents') ? 'cookie-consents' : 'dashboard';
+                   location.pathname.includes('cookie-consents') ? 'cookie-consents' : 
+                   location.pathname.includes('enquiries') ? 'enquiries' : 'dashboard';
 
   // Check if user is authenticated
   useEffect(() => {
@@ -117,9 +118,15 @@ const AdminDashboard: React.FC = () => {
           </Link>
           <Link 
             to="/admin/dashboard/cookie-consents"
-            className="px-4 py-3 text-gray-700 hover:bg-gray-50 block"
+            className={`px-4 py-3 block ${activeTab === 'cookie-consents' ? 'bg-blue-50 border-r-4 border-blue-500 text-blue-600' : 'text-gray-700 hover:bg-gray-50'}`}
           >
             Cookie Consents
+          </Link>
+          <Link 
+            to="/admin/dashboard/enquiries"
+            className={`px-4 py-3 block ${activeTab === 'enquiries' ? 'bg-blue-50 border-r-4 border-blue-500 text-blue-600' : 'text-gray-700 hover:bg-gray-50'}`}
+          >
+            Enquiries & Applications
           </Link>
         </nav>
       </div>
