@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { API_BASE_URL } from '../config/apiConfig';
+import ushaImage from '../assets/usha.jpeg';
 
 const HRAcademy: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'individual' | 'corporate'>('individual');
@@ -394,31 +395,54 @@ const HRAcademy: React.FC = () => {
         </div>
       </section>
 
-      {/* Meet Your Mentor */}
-      <section className="py-20 bg-white">
+      {/* Meet The Founder */}
+      <section className="py-20 bg-white" id="founder">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto bg-slate-50 rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
               <div className="lg:col-span-1 text-center">
-                <div className="w-48 h-48 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-5xl font-bold mx-auto shadow-lg mb-6">
-                  UP
+                <div className="w-52 h-52 rounded-2xl overflow-hidden shadow-xl mx-auto mb-6 border-4 border-white">
+                  <img 
+                    src={ushaImage} 
+                    alt="Usha Pandey - Founder & Director" 
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900">Usha Pandey</h3>
-                <p className="text-blue-600 font-semibold mt-1">Founder</p>
-                <p className="text-slate-500 text-xs mt-2">AlgroFlix HR Academy</p>
+                <p className="text-blue-600 font-semibold mt-1">Founder & Director</p>
+                <p className="text-slate-500 text-xs mt-1">AlgroFlix Solutions</p>
+                <span className="inline-block mt-3 bg-indigo-100 text-indigo-800 text-xs font-bold px-3.5 py-1 rounded-full shadow-sm">
+                  🎓 IIM Kolkata Alumni
+                </span>
               </div>
 
-              <div className="lg:col-span-2">
-                <span className="text-blue-600 font-bold text-xs uppercase tracking-wider">Meet Your Mentor</span>
-                <h4 className="text-2xl font-bold text-slate-900 mt-2 mb-4">
-                  HR Leader | HR Business Partner | HR Strategist | Corporate Trainer
-                </h4>
-                <p className="text-slate-600 leading-relaxed mb-6">
-                  With 15+ years of experience across IT, Engineering, Higher Education, Operations, and Strategic HR, Usha Pandey has led HR transformation, talent acquisition, HR operations, compliance, performance management, and organizational development initiatives.
+              <div className="lg:col-span-2 space-y-4 text-slate-600 leading-relaxed text-sm">
+                <div>
+                  <span className="text-blue-600 font-bold text-xs uppercase tracking-wider block mb-1">Meet The Founder</span>
+                  <h4 className="text-2xl font-bold text-slate-900">
+                    Leader | HR Business Partner | Digital HR Strategist
+                  </h4>
+                </div>
+
+                <p>
+                  <strong>Usha Pandey</strong> is the Founder & Director of AlgroFlix Solutions, a seasoned HR leader, and an <strong>IIM Kolkata Alumni</strong> with over 20 years of rich experience in Human Resources, HR Business Partnering, Talent Acquisition, Digital HR Transformation, and Workforce Strategy across leading IT and technology organizations.
                 </p>
-                <div className="border-t border-slate-200 pt-6">
+
+                <p>
+                  Holding a <strong>B.Tech, M.Tech, and MBA in Human Resources</strong>, Usha has successfully led HR functions for organizations managing over 1,200 employees, partnering with business leaders to drive organizational growth through strategic workforce planning, leadership development, employee engagement, performance management, compensation & benefits, and HR operations.
+                </p>
+
+                <p>
+                  She has worked with renowned organizations including <strong>HCL Technologies, Innover Digital, Caspex Tech, Flutura (Accenture), and InfoTech Global</strong>, where she delivered measurable business impact by leveraging AI-driven recruitment, HR analytics, process automation, and digital transformation initiatives.
+                </p>
+
+                <p>
+                  As the Founder of AlgroFlix Solutions, Usha is committed to delivering innovative HR consulting, staffing, talent solutions, and practical HR learning programs that bridge the gap between industry expectations and professional capabilities. Her vision is to empower organizations with strategic HR solutions and help aspiring HR professionals build successful careers through practical, industry-focused learning.
+                </p>
+
+                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm mt-4">
                   <p className="text-slate-800 font-medium italic">
-                    "Her vision is to make HR education practical, industry-driven, and career-focused."
+                    "With a passion for people, innovation, and continuous learning, Usha believes that great organizations are built by empowering people, embracing technology, and creating a culture of excellence."
                   </p>
                 </div>
               </div>

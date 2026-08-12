@@ -15,11 +15,10 @@ type EnquiryRecord = {
   createdAt: string;
 };
 
-const Enquiries: React.FC = () => {
+const HRAcademyEnquiries: React.FC = () => {
   const [enquiries, setEnquiries] = useState<EnquiryRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [filterType, setFilterType] = useState<'all' | 'hr-academy' | 'general'>('all');
   const [selectedEnquiry, setSelectedEnquiry] = useState<EnquiryRecord | null>(null);
 
   // Pagination state
@@ -79,7 +78,7 @@ const Enquiries: React.FC = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this record?')) return;
+    if (!window.confirm('Are you sure you want to delete this enquiry?')) return;
 
     try {
       const token = localStorage.getItem('adminToken');
@@ -114,19 +113,16 @@ const Enquiries: React.FC = () => {
     });
   };
 
-  // Filter records
-  const filteredEnquiries = enquiries.filter(item => {
-    if (filterType === 'all') return true;
-    return item.type === filterType;
-  });
+  // Filter specifically for HR Academy enquiries
+  const hrAcademyEnquiries = enquiries.filter(item => item.type === 'hr-academy');
 
   // Paginated records
-  const paginatedEnquiries = filteredEnquiries.slice(
+  const paginatedEnquiries = hrAcademyEnquiries.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  const totalPages = Math.ceil(filteredEnquiries.length / itemsPerPage);
+  const totalPages = Math.ceil(hrAcademyEnquiries.length / itemsPerPage);
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -143,15 +139,15 @@ const Enquiries: React.FC = () => {
             >
               Dashboard
             </Link>
-            <div className="px-4 py-3 bg-blue-50 border-r-4 border-blue-500 text-blue-600 font-medium">
-              General Enquiries
-            </div>
             <Link 
-              to="/admin/dashboard/hr-academy-enquiries" 
+              to="/admin/dashboard/enquiries" 
               className="px-4 py-3 block text-gray-700 hover:bg-gray-50"
             >
-              HR Academy Enquiries
+              General Enquiries
             </Link>
+            <div className="px-4 py-3 bg-purple-50 border-r-4 border-purple-600 text-purple-700 font-medium">
+              HR Academy Enquiries
+            </div>
             <Link 
               to="/admin/dashboard/cookie-consents" 
               className="px-4 py-3 block text-gray-700 hover:bg-gray-50"
@@ -167,7 +163,7 @@ const Enquiries: React.FC = () => {
         {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="flex items-center justify-between px-6 py-4">
-            <h2 className="text-xl font-semibold text-gray-800">Enquiries & Applications</h2>
+            <h2 className="text-xl font-semibold text-gray-800">HR Academy Enquiries</h2>
             <button 
               className="flex items-center text-gray-700 hover:text-gray-900"
               onClick={handleLogout}
@@ -189,37 +185,20 @@ const Enquiries: React.FC = () => {
               </div>
             )}
 
-            {/* Filter Tabs */}
-            <div className="flex space-x-2 mb-6">
-              {(['all', 'hr-academy', 'general'] as const).map(type => (
-                <button
-                  key={type}
-                  onClick={() => {
-                    setFilterType(type);
-                    setCurrentPage(1);
-                  }}
-                  className={`px-4 py-2 text-sm font-semibold rounded-md transition ${
-                    filterType === type 
-                      ? 'bg-blue-600 text-white shadow' 
-                      : 'bg-white text-gray-700 border hover:bg-gray-50'
-                  }`}
-                >
-                  {type === 'all' ? 'All Enquiries' : type === 'hr-academy' ? 'HR Academy' : 'General Contact'}
-                </button>
-              ))}
-            </div>
-
             {loading ? (
               <div className="bg-white shadow rounded-lg p-6 text-center">
-                <p className="text-gray-600">Loading records...</p>
+                <p className="text-gray-600">Loading HR Academy records...</p>
               </div>
             ) : (
               <div className="bg-white shadow rounded-lg overflow-hidden">
                 <div className="px-6 py-4 border-b flex justify-between items-center bg-gray-50">
-                  <h3 className="text-lg font-semibold text-gray-900">Enquiry Records ({filteredEnquiries.length})</h3>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">HR Academy Student Inquiries ({hrAcademyEnquiries.length})</h3>
+                    <p className="text-xs text-gray-500">Submissions received from /hr-academy page</p>
+                  </div>
                   <button 
                     onClick={fetchEnquiries}
-                    className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-md font-medium"
+                    className="text-sm bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-1.5 rounded-md font-medium"
                   >
                     Refresh
                   </button>
@@ -230,17 +209,16 @@ const Enquiries: React.FC = () => {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Received At</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Name</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Contact info</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Type</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Interest / Subj</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Applicant Name</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Contact Details</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Inquiry Type</th>
                         <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {paginatedEnquiries.map((item) => (
-                        <tr key={item._id} className="hover:bg-slate-55/40">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-550">
+                        <tr key={item._id} className="hover:bg-purple-50/30">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {formatDate(item.createdAt)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
@@ -251,26 +229,23 @@ const Enquiries: React.FC = () => {
                             <div>📞 {item.phone}</div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`px-2.5 py-1 inline-flex text-xs font-semibold rounded-full ${
-                              item.type === 'hr-academy' 
-                                ? 'bg-purple-100 text-purple-800' 
-                                : 'bg-blue-100 text-blue-800'
+                            <span className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${
+                              item.interest === 'residency'
+                                ? 'bg-purple-100 text-purple-800'
+                                : 'bg-teal-100 text-teal-800'
                             }`}>
-                              {item.type === 'hr-academy' ? 'HR Academy' : 'General'}
+                              {item.interest === 'residency' 
+                                ? '🎯 HR Residency Program' 
+                                : '💬 Career Counselling'
+                              }
                             </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-600 max-w-xs truncate">
-                            {item.type === 'hr-academy' 
-                              ? (item.interest === 'residency' ? 'Certified Program Enrollment' : 'Book Counselling')
-                              : (item.service || 'General Enquiry')
-                            }
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                             <button
                               onClick={() => setSelectedEnquiry(item)}
-                              className="text-blue-600 hover:text-blue-900"
+                              className="text-purple-600 hover:text-purple-900 font-semibold"
                             >
-                              View
+                              View Details
                             </button>
                             <button
                               onClick={() => handleDelete(item._id)}
@@ -282,10 +257,10 @@ const Enquiries: React.FC = () => {
                         </tr>
                       ))}
 
-                      {filteredEnquiries.length === 0 && (
+                      {hrAcademyEnquiries.length === 0 && (
                         <tr>
-                          <td colSpan={6} className="text-center py-12 text-gray-500">
-                            No enquiries found.
+                          <td colSpan={5} className="text-center py-12 text-gray-500">
+                            No HR Academy enquiries received yet.
                           </td>
                         </tr>
                       )}
@@ -303,14 +278,14 @@ const Enquiries: React.FC = () => {
                       <button
                         onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}
-                        className="px-3 py-1 bg-white border border-gray-300 rounded text-sm disabled:opacity-50 hover:bg-gray-55"
+                        className="px-3 py-1 bg-white border border-gray-300 rounded text-sm disabled:opacity-50 hover:bg-gray-50"
                       >
                         Previous
                       </button>
                       <button
                         onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-1 bg-white border border-gray-300 rounded text-sm disabled:opacity-50 hover:bg-gray-55"
+                        className="px-3 py-1 bg-white border border-gray-300 rounded text-sm disabled:opacity-50 hover:bg-gray-50"
                       >
                         Next
                       </button>
@@ -327,11 +302,11 @@ const Enquiries: React.FC = () => {
       {selectedEnquiry && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden">
-            <div className="px-6 py-4 bg-slate-50 border-b flex justify-between items-center">
-              <h3 className="text-lg font-bold text-gray-900">Enquiry Details</h3>
+            <div className="px-6 py-4 bg-purple-900 text-white flex justify-between items-center">
+              <h3 className="text-lg font-bold">HR Academy Enquiry Details</h3>
               <button 
                 onClick={() => setSelectedEnquiry(null)}
-                className="text-gray-400 hover:text-gray-600 text-xl font-bold"
+                className="text-white/80 hover:text-white text-xl font-bold"
               >
                 ×
               </button>
@@ -344,55 +319,40 @@ const Enquiries: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Source Channel</span>
-                  <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 mt-1 rounded-full ${
-                    selectedEnquiry.type === 'hr-academy' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
-                  }`}>
-                    {selectedEnquiry.type === 'hr-academy' ? 'HR Academy' : 'General website contact'}
+                  <span className="inline-block text-xs font-semibold px-2.5 py-0.5 mt-1 rounded-full bg-purple-100 text-purple-800">
+                    HR Academy Page (/hr-academy)
                   </span>
                 </div>
               </div>
 
               <div className="border-t pt-4">
-                <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Sender Name</span>
+                <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Applicant Name</span>
                 <span className="text-base text-gray-900 font-bold">{selectedEnquiry.name}</span>
               </div>
 
               <div className="grid grid-cols-2 gap-4 border-t pt-4">
                 <div>
                   <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Email</span>
-                  <a href={`mailto:${selectedEnquiry.email}`} className="text-sm text-blue-600 hover:underline">{selectedEnquiry.email}</a>
+                  <a href={`mailto:${selectedEnquiry.email}`} className="text-sm text-purple-600 hover:underline font-medium">{selectedEnquiry.email}</a>
                 </div>
                 <div>
                   <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Phone</span>
-                  <a href={`tel:${selectedEnquiry.phone}`} className="text-sm text-blue-600 hover:underline">{selectedEnquiry.phone}</a>
+                  <a href={`tel:${selectedEnquiry.phone}`} className="text-sm text-purple-600 hover:underline font-medium">{selectedEnquiry.phone}</a>
                 </div>
               </div>
 
-              {selectedEnquiry.type === 'hr-academy' ? (
-                <div className="border-t pt-4">
-                  <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Program / Option Selected</span>
-                  <span className="text-sm font-semibold text-slate-800">
-                    {selectedEnquiry.interest === 'residency' 
-                      ? 'Certified HR Generalist Residency Program (100-Day)' 
-                      : 'Free Career Counselling Session Request'
-                    }
-                  </span>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-4 border-t pt-4">
-                  <div>
-                    <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Company</span>
-                    <span className="text-sm text-gray-900 font-semibold">{selectedEnquiry.company || 'Not Specified'}</span>
-                  </div>
-                  <div>
-                    <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Service of Interest</span>
-                    <span className="text-sm text-gray-900 font-semibold">{selectedEnquiry.service || 'Not Specified'}</span>
-                  </div>
-                </div>
-              )}
+              <div className="border-t pt-4">
+                <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider">Inquiry Type Selected</span>
+                <span className="text-sm font-semibold text-slate-800">
+                  {selectedEnquiry.interest === 'residency' 
+                    ? '🎯 Certified HR Generalist Residency Program (100-Day)' 
+                    : '💬 Free Career Counselling Session'
+                  }
+                </span>
+              </div>
 
               <div className="border-t pt-4">
-                <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider mb-1">Message Details</span>
+                <span className="text-xs text-gray-450 block uppercase font-bold tracking-wider mb-1">Enquiry Message / Details</span>
                 <div className="bg-slate-50 p-4 rounded-xl text-sm text-gray-700 border whitespace-pre-line leading-relaxed max-h-60 overflow-y-auto">
                   {selectedEnquiry.message || 'No additional message provided.'}
                 </div>
@@ -401,7 +361,7 @@ const Enquiries: React.FC = () => {
             <div className="px-6 py-4 bg-slate-50 border-t flex justify-end">
               <button
                 onClick={() => setSelectedEnquiry(null)}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg text-sm transition"
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg text-sm transition"
               >
                 Close
               </button>
@@ -413,4 +373,4 @@ const Enquiries: React.FC = () => {
   );
 };
 
-export default Enquiries;
+export default HRAcademyEnquiries;

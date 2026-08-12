@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 
 import Footer from './components/Footer';
-import AIChatWidget from './components/AIChatWidget';
 import About from './components/About';
 import Contact from './components/Contact';
 import Careers from './components/Careers';
@@ -31,6 +30,7 @@ import BlogListing from './components/BlogListing';
 import BlogDetail from './components/BlogDetail';
 import HRAcademy from './components/HRAcademy';
 import Enquiries from './components/Enquiries';
+import HRAcademyEnquiries from './components/HRAcademyEnquiries';
 
 // Component to handle section highlighting in header
 const SectionHandler: React.FC<{ setActiveSection: (section: string) => void }> = ({ setActiveSection }) => {
@@ -90,11 +90,11 @@ const AppContent: React.FC = () => {
           <Route path="/admin/blog/edit/:id" element={<BlogForm />} />
           <Route path="/admin/dashboard/cookie-consents" element={<CookieConsents />} />
           <Route path="/admin/dashboard/enquiries" element={<Enquiries />} />
+          <Route path="/admin/dashboard/hr-academy-enquiries" element={<HRAcademyEnquiries />} />
         </Routes>
       </main>
       
       {!isAdminRoute && <Footer />}
-      {!isAdminRoute && <AIChatWidget />}
       {!isAdminRoute && <CookieConsent />}
     </>
   );
